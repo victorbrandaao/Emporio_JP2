@@ -1,0 +1,31 @@
+{
+    "categories": [
+        "Latic\u00ednios",
+        "Bebidas",
+        "Snacks",
+        "Teste",
+        "Teste2"
+    ],
+    "products": [
+        {
+            "name": "A",
+            "category": "Bebidas",
+            "quantity": 1
+        },
+        {
+            "name": "Biscoito",
+            "category": "Bebidas",
+            "quantity": 10
+        },
+        {
+            "name": "Leite",
+            "category": "Latic\u00ednios",
+            "quantity": 4
+        },
+        {
+            "name": "Leite em caixa",
+            "category": "Latic\u00ednios",
+            "quantity": 8
+        }
+    ]
+}

@@ -1,0 +1,80 @@
+/* Estilos gerais */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f8f9fa;
+}
+
+.container {
+    max-width: 960px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border-radius: 8px;
+}
+
+/* Estilo para cabeçalhos */
+h1, h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Estilo para ícones */
+.fa-tags, .fa-boxes {
+    margin-right: 10px;
+}
+
+/* Estilo para formulários */
+.form-control, .form-select {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-control:focus, .form-select:focus {
+    outline: none;
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Estilo para botões */
+.btn-primary {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    transition: background-color 0.15s ease-in-out;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+/* Estilo para listas */
+.list-group {
+    margin-top: 20px;
+}
+
+.list-group-item {
+    background-color: #f8f9fa;
+    border: none;
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.list-group-item:last-child {
+    margin-bottom: 0;
+}
+
+/* Estilos adicionais personalizados */
+.product-card {
+    margin-bottom: 20px;
+}
+
