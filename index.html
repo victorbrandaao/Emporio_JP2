@@ -12,54 +12,37 @@
 <div class="container">
     <h1 class="mt-5">EmporioJP2 - Controle de Estoque</h1>
     <div class="row mt-4">
-        <!-- Coluna de Categorias -->
         <div class="col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <h2><i class="fas fa-tags"></i> Categorias</h2>
-                    <form id="categoryForm" class="mb-3">
-                        <div class="input-group mb-3">
-                            <input type="text" id="categoryName" class="form-control" placeholder="Nome da nova categoria" aria-label="Nome da nova categoria" aria-describedby="add-category-btn">
-                            <button class="btn btn-primary" type="submit" id="add-category-btn">Adicionar</button>
-                        </div>
-                    </form>
-                    <ul id="categoriesList" class="list-group">
-                        <!-- Categorias serão adicionadas dinamicamente aqui -->
-                    </ul>
+            <h2><i class="fas fa-tags"></i> Categorias</h2>
+            <form id="categoryForm" class="mb-3">
+                <div class="input-group mb-3">
+                    <input type="text" id="categoryName" class="form-control" placeholder="Nome da nova categoria" aria-label="Nome da nova categoria" aria-describedby="add-category-btn">
+                    <button class="btn btn-primary" type="submit" id="add-category-btn">Adicionar Categoria</button>
                 </div>
-            </div>
+            </form>
+            <ul id="categoriesList" class="list-group">
+                <!-- Categorias serão adicionadas dinamicamente aqui -->
+            </ul>
         </div>
-
-        <!-- Coluna de Produtos -->
         <div class="col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <h2><i class="fas fa-boxes"></i> Produtos</h2>
-                    <form id="productForm" class="mb-3">
-                        <div class="mb-3">
-                            <input type="text" id="productName" class="form-control" placeholder="Nome do novo produto">
-                        </div>
-                        <div class="mb-3">
-                            <select id="productCategory" class="form-select">
-                                <option selected disabled>Selecione a categoria</option>
-                                <!-- Opções de categoria serão adicionadas dinamicamente aqui -->
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <input type="number" id="productQuantity" class="form-control" placeholder="Quantidade">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Adicionar Produto</button>
-                    </form>
+            <h2><i class="fas fa-boxes"></i> Produtos</h2>
+            <form id="productForm" class="mb-3">
+                <div class="mb-3">
+                    <input type="text" id="productName" class="form-control" placeholder="Nome do novo produto">
                 </div>
-            </div>
-
-            <!-- Lista de Produtos -->
-            <div class="card mt-3">
-                <div class="card-body">
-                    <div id="productsContainer" class="row">
-                        <!-- Produtos serão adicionados dinamicamente aqui -->
-                    </div>
+                <div class="mb-3">
+                    <select id="productCategory" class="form-select">
+                        <option selected disabled>Selecione a categoria</option>
+                        <!-- Opções de categoria serão adicionadas dinamicamente aqui -->
+                    </select>
                 </div>
+                <div class="mb-3">
+                    <input type="number" id="productQuantity" class="form-control" placeholder="Quantidade">
+                </div>
+                <button type="submit" class="btn btn-primary">Adicionar Produto</button>
+            </form>
+            <div id="productsContainer" class="row">
+                <!-- Produtos serão adicionados dinamicamente aqui -->
             </div>
         </div>
     </div>
