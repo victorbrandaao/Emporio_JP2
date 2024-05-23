@@ -4,47 +4,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EmporioJP2 - Controle de Estoque</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <div class="container">
-    <h1 class="mt-5">EmporioJP2 - Controle de Estoque</h1>
-    <div class="row mt-4">
-        <div class="col-md-6">
-            <h2><i class="fas fa-tags"></i> Categorias</h2>
-            <form id="categoryForm" class="mb-3">
-                <div class="input-group mb-3">
-                    <input type="text" id="categoryName" class="form-control" placeholder="Nome da nova categoria" aria-label="Nome da nova categoria" aria-describedby="add-category-btn">
-                    <button class="btn btn-primary" type="submit" id="add-category-btn">Adicionar Categoria</button>
+    <h1 class="title has-text-centered">EmporioJP2 - Controle de Estoque</h1>
+
+    <div class="section">
+        <h2 class="subtitle has-text-centered">Produtos</h2>
+        <form id="productForm" class="box">
+            <div class="field">
+                <label class="label">Nome do Produto</label>
+                <div class="control">
+                    <input type="text" id="productName" class="input" placeholder="Nome do novo produto">
                 </div>
-            </form>
-            <ul id="categoriesList" class="list-group">
-                <!-- Categorias serão adicionadas dinamicamente aqui -->
-            </ul>
-        </div>
-        <div class="col-md-6">
-            <h2><i class="fas fa-boxes"></i> Produtos</h2>
-            <form id="productForm" class="mb-3">
-                <div class="mb-3">
-                    <input type="text" id="productName" class="form-control" placeholder="Nome do novo produto">
-                </div>
-                <div class="mb-3">
-                    <select id="productCategory" class="form-select">
-                        <option selected disabled>Selecione a categoria</option>
-                        <!-- Opções de categoria serão adicionadas dinamicamente aqui -->
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <input type="number" id="productQuantity" class="form-control" placeholder="Quantidade">
-                </div>
-                <button type="submit" class="btn btn-primary">Adicionar Produto</button>
-            </form>
-            <div id="productsContainer" class="row">
-                <!-- Produtos serão adicionados dinamicamente aqui -->
             </div>
-        </div>
+            <div class="field">
+                <label class="label">Categoria</label>
+                <div class="control">
+                    <div class="select is-fullwidth">
+                        <select id="productCategory">
+                            <option selected disabled>Selecione a categoria</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Quantidade</label>
+                <div class="control">
+                    <input type="number" id="productQuantity" class="input" placeholder="Quantidade">
+                </div>
+            </div>
+            <button type="submit" class="button is-primary is-fullwidth">Adicionar Produto</button>
+        </form>
+
+        <div id="productsContainer" class="columns is-multiline"></div>
+    </div>
+
+    <div class="section">
+        <h2 class="subtitle has-text-centered">Categorias</h2>
+        <form id="categoryForm" class="box">
+            <div class="field">
+                <label class="label">Nome da Categoria</label>
+                <div class="control">
+                    <input type="text" id="categoryName" class="input" placeholder="Nome da nova categoria">
+                </div>
+            </div>
+            <button type="submit" class="button is-primary is-fullwidth">Adicionar Categoria</button>
+        </form>
+
+        <ul id="categoriesList" class="list"></ul>
     </div>
 </div>
 

@@ -1,13 +1,19 @@
 let categories = [];
 let products = [];
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', () => {
     loadData();
 
     const categoryForm = document.getElementById('categoryForm');
     const productForm = document.getElementById('productForm');
 
-    categoryForm.addEventListener('submit', function(event) {
+    categoryForm.addEventListener('submit', handleCategoryFormSubmit);
+    productForm.addEventListener('submit', handleProductFormSubmit);
+
+    document.getElementById('categoriesList').addEventListener('click', handleCategoryListClick);
+    document.getElementById('productsContainer').addEventListener('click', handleProductContainerClick);
+
+    function handleCategoryFormSubmit(event) {
         event.preventDefault();
         const categoryName = document.getElementById('categoryName').value.trim();
         if (categoryName === '') return;
@@ -15,9 +21,9 @@ document.addEventListener('DOMContentLoaded', function() {
         addCategory(categoryName);
         saveData();
         categoryForm.reset();
-    });
+    }
 
-    productForm.addEventListener('submit', function(event) {
+    function handleProductFormSubmit(event) {
         event.preventDefault();
         const productName = document.getElementById('productName').value.trim();
         const productCategory = document.getElementById('productCategory').value;
@@ -28,46 +34,42 @@ document.addEventListener('DOMContentLoaded', function() {
         addProduct(productName, productCategory, productQuantity);
         saveData();
         productForm.reset();
-    });
-
-    function loadData() {
-        fetch('load_data.php')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Erro ao carregar dados. Status: ' + response.status);
-                }
-                return response.json();
-            })
-            .then(data => {
-                categories = data.categories || [];
-                products = data.products || [];
-                populateCategories();
-                populateProducts();
-            })
-            .catch(error => {
-                console.error('Erro ao carregar dados:', error);
-            });
     }
 
-    function saveData() {
+    async function loadData() {
+        try {
+            const response = await fetch('load_data.php');
+            if (!response.ok) {
+                throw new Error(`Erro ao carregar dados. Status: ${response.status}`);
+            }
+            const data = await response.json();
+            categories = data.categories || [];
+            products = data.products || [];
+            populateCategories();
+            populateProducts();
+        } catch (error) {
+            console.error('Erro ao carregar dados:', error);
+        }
+    }
+
+    async function saveData() {
         const data = { categories, products };
 
-        fetch('save_data.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Erro ao salvar dados. Status: ' + response.status);
-                }
-                console.log('Dados salvos com sucesso.');
-            })
-            .catch(error => {
-                console.error('Erro ao salvar dados:', error);
+        try {
+            const response = await fetch('save_data.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
             });
+            if (!response.ok) {
+                throw new Error(`Erro ao salvar dados. Status: ${response.status}`);
+            }
+            console.log('Dados salvos com sucesso.');
+        } catch (error) {
+            console.error('Erro ao salvar dados:', error);
+        }
     }
 
     function addCategory(name) {
@@ -89,30 +91,28 @@ document.addEventListener('DOMContentLoaded', function() {
 
         categories.forEach(category => {
             const li = document.createElement('li');
-            li.className = 'list-group-item d-flex justify-content-between align-items-center';
+            li.className = 'category-item';
             li.textContent = category;
 
             const removeButton = document.createElement('i');
-            removeButton.className = 'fas fa-trash-alt text-danger me-2';
+            removeButton.className = 'fas fa-trash-alt text-danger';
             removeButton.style.cursor = 'pointer';
-            removeButton.addEventListener('click', function() {
-                removeCategory(category);
-            });
+            removeButton.dataset.action = 'remove-category';
+            removeButton.dataset.category = category;
             li.appendChild(removeButton);
 
             const showProductsButton = document.createElement('button');
-            showProductsButton.className = 'btn btn-outline-primary btn-sm';
+            showProductsButton.className = 'button is-small is-light';
             showProductsButton.textContent = 'Ver Produtos';
             showProductsButton.style.marginLeft = '10px';
-            showProductsButton.addEventListener('click', function() {
-                toggleProductsList(category);
-            });
+            showProductsButton.dataset.action = 'toggle-products';
+            showProductsButton.dataset.category = category;
             li.appendChild(showProductsButton);
 
             const productsListContainer = document.createElement('ul');
             productsListContainer.id = `${category}Products`;
-            productsListContainer.className = 'list-group mt-2';
-            productsListContainer.style.display = 'none'; // Inicialmente oculto
+            productsListContainer.className = 'list';
+            productsListContainer.style.display = 'none';
 
             li.appendChild(productsListContainer);
             categoriesList.appendChild(li);
@@ -129,13 +129,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
             categoryProducts.forEach(product => {
                 const li = document.createElement('li');
-                li.className = 'list-group-item d-flex justify-content-between align-items-center';
+                li.className = 'list-item d-flex justify-content-between align-items-center';
                 li.innerHTML = `
                     ${product.name}
                     <div>
                         <span>(${product.quantity})</span>
-                        <button class="btn btn-outline-primary btn-sm ms-2" onclick="increaseProductQuantity('${product.name}', '${product.category}')">+</button>
-                        <button class="btn btn-outline-primary btn-sm ms-1" onclick="decreaseProductQuantity('${product.name}', '${product.category}')">-</button>
+                        <button class="button is-small is-info" data-action="increase-quantity" data-name="${product.name}" data-category="${product.category}">+</button>
+                        <button class="button is-small is-info" data-action="decrease-quantity" data-name="${product.name}" data-category="${product.category}">-</button>
                     </div>
                 `;
                 productsListContainer.appendChild(li);
@@ -155,29 +155,43 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    function handleCategoryListClick(event) {
+        const action = event.target.dataset.action;
+        const category = event.target.dataset.category;
+
+        if (action === 'remove-category') {
+            removeCategory(category);
+        } else if (action === 'toggle-products') {
+            toggleProductsList(category);
+        }
+    }
+
+    function handleProductContainerClick(event) {
+        const action = event.target.dataset.action;
+        const name = event.target.dataset.name;
+        const category = event.target.dataset.category;
+
+        if (action === 'increase-quantity') {
+            increaseProductQuantity(name, category);
+        } else if (action === 'decrease-quantity') {
+            decreaseProductQuantity(name, category);
+        }
+    }
+
     function removeCategory(name) {
         categories = categories.filter(category => category !== name);
         products = products.filter(product => product.category !== name);
         populateCategories();
-        saveData();
-    }
-
-    window.removeProduct = function(name) {
-        products = products.filter(product => product.name !== name);
         populateProducts();
         saveData();
     }
 
     function toggleProductsList(categoryName) {
         const productsListContainer = document.getElementById(`${categoryName}Products`);
-        if (productsListContainer.style.display === 'none') {
-            productsListContainer.style.display = 'block';
-        } else {
-            productsListContainer.style.display = 'none';
-        }
+        productsListContainer.style.display = productsListContainer.style.display === 'none' ? 'block' : 'none';
     }
 
-    window.increaseProductQuantity = function(productName, categoryName) {
+    function increaseProductQuantity(productName, categoryName) {
         const product = products.find(prod => prod.name === productName && prod.category === categoryName);
         if (product) {
             product.quantity++;
@@ -186,7 +200,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    window.decreaseProductQuantity = function(productName, categoryName) {
+    function decreaseProductQuantity(productName, categoryName) {
         const product = products.find(prod => prod.name === productName && prod.category === categoryName);
         if (product && product.quantity > 0) {
             product.quantity--;

@@ -1,80 +1,93 @@
-/* Estilos gerais */
 body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #f8f9fa;
+    font-family: 'Roboto', sans-serif; /* Fonte moderna e legível */
+    background-color: #f5f5f5; /* Cor de fundo neutra e relaxante */
+    color: #333; /* Cor de texto escura para melhor legibilidade */
 }
 
 .container {
-    max-width: 960px;
-    margin: 30px auto;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    border-radius: 8px;
+    max-width: 1000px; /* Ajuste a largura do container se necessário */
+    margin: 20px auto; /* Centralize o container na página com mais espaço */
+    padding: 15px;
+    border-radius: 10px; /* Arredonde os cantos do container com mais suavidade */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adicione uma sombra mais marcante */
 }
 
-/* Estilo para cabeçalhos */
 h1, h2 {
-    color: #333;
     margin-bottom: 20px;
+    font-weight: 600; /* Aumente o peso dos títulos para destaque */
 }
 
-/* Estilo para ícones */
-.fa-tags, .fa-boxes {
-    margin-right: 10px;
+h1 {
+    font-size: 36px; /* Aumente o tamanho do título principal */
 }
 
-/* Estilo para formulários */
-.form-control, .form-select {
-    width: 100%;
-    padding: 12px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+h2 {
+    font-size: 28px; /* Ajuste o tamanho do título secundário */
 }
 
-.form-control:focus, .form-select:focus {
-    outline: none;
-    border-color: #80bdff;
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+#productForm {
+    margin-bottom: 40px; /* Aumente o espaço entre o formulário e outros elementos */
 }
 
-/* Estilo para botões */
-.btn-primary {
-    width: 100%;
-    padding: 12px;
-    font-size: 16px;
-    border: none;
-    border-radius: 4px;
-    background-color: #007bff;
-    transition: background-color 0.15s ease-in-out;
+.field {
+    margin-bottom: 20px; /* Ajuste o espaço entre os campos do formulário */
 }
 
-.btn-primary:hover {
-    background-color: #0056b3;
+.label {
+    font-weight: 600; /* Aumente o peso dos rótulos para destaque */
+    color: #777; /* Cor cinza escura para os rótulos */
 }
 
-/* Estilo para listas */
-.list-group {
-    margin-top: 20px;
+.input, .select select {
+    width: 100%; /* Ocupe toda a largura disponível */
+    padding: 12px 15px; /* Ajuste o padding para melhor usabilidade */
+    border: 1px solid #ddd; /* Adicione uma borda leve e mais sutil */
+    border-radius: 6px; /* Arredonde os cantos dos campos de entrada com mais suavidade */
 }
 
-.list-group-item {
-    background-color: #f8f9fa;
-    border: none;
-    padding: 12px;
-    margin-bottom: 10px;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+.input:focus, .select select:focus {
+    outline: none; /* Remova o contorno padrão ao focar no campo */
+    box-shadow: 0 0 0 2px #007bff, 0 0 0 5px rgba(0, 0, 0, 0.1); /* Adicione uma sombra de foco azul */
 }
 
-.list-group-item:last-child {
-    margin-bottom: 0;
+.button {
+    background-color: #007bff; /* Cor azul para o botão */
+    border: none; /* Remova a borda padrão */
+    color: white; /* Texto branco para contraste */
+    padding: 14px 22px; /* Aumente o padding para melhor aparência */
+    border-radius: 6px; /* Arredonde os cantos do botão com mais suavidade */
+    cursor: pointer; /* Indicar que o elemento é clicável */
+    transition: background-color 0.3s; /* Adicione uma transição suave na cor do botão ao passar o mouse */
 }
 
-/* Estilos adicionais personalizados */
+.button:hover {
+    background-color: #0056b3; /* Cor azul mais escura ao passar o mouse */
+}
+
+#productsContainer {
+    display: grid; /* Utilize um layout em grade para organizar os produtos */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Crie colunas dinâmicas com base no tamanho da tela e ajuste a largura mínima */
+    gap: 20px; /* Aumente o espaço entre os produtos para mais organização */
+}
+
 .product-card {
-    margin-bottom: 20px;
+    background-color: white; /* Cor de fundo para os cards de produto */
+    padding: 20px; /* Aumente o padding para melhor visualização */
+    border-radius: 10px; /* Arredonde os cantos dos cards com mais suavidade */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
+.category-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.category-item .button {
+    margin-left: 10px;
+}

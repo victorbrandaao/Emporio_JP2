@@ -2,15 +2,13 @@
     "categories": [
         "Latic\u00ednios",
         "Bebidas",
-        "Snacks",
-        "Teste",
-        "Teste2"
+        "Biscoitinho"
     ],
     "products": [
         {
             "name": "A",
             "category": "Bebidas",
-            "quantity": 1
+            "quantity": 3
         },
         {
             "name": "Biscoito",
@@ -26,6 +24,16 @@
             "name": "Leite em caixa",
             "category": "Latic\u00ednios",
             "quantity": 8
+        },
+        {
+            "name": "Biscoitinho1",
+            "category": "Selecione a categoria",
+            "quantity": 10
+        },
+        {
+            "name": "Informa\u00e7\u00f5es",
+            "category": "Biscoitinho",
+            "quantity": 15
         }
     ]
 }
